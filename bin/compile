@@ -24,7 +24,8 @@ if [ -e $CACHE_DIR/dotghc ]; then
 fi
 
 # Fix directory
-mv $CACHE_DIR/ghc $FIXED_HOME
+mkdir -p $FIXED_HOME
+mv $CACHE_DIR/ghc $FIXED_HOME/ghc
 
 # Restore Cabal cache or download an empty environemt
 if [ -e $CACHE_DIR/cabal ]; then
@@ -42,7 +43,7 @@ ln -s /usr/lib/libgmp.so.3.5.2 $FIXED_HOME/usr/lib/libgmp.so
 export LD_LIBRARY_PATH=$FIXED_HOME/usr/lib
 
 # Set PATH
-export PATH=$FIXED_HOME/bin:$FIXED_HOME/.cabal/bin:$PATH
+export PATH=$FIXED_HOME/ghc/bin:$FIXED_HOME/.cabal/bin:$PATH
 
 echo "-----> Updating Cabal"
 cabal update
